@@ -40,12 +40,13 @@ public class CController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+    //stream usage with filter
     @PostMapping("newCourse")
     public ResponseEntity<String> createCourse(@RequestBody Course course){
         courseList.add(course);
         return new ResponseEntity<>("Course added",HttpStatus.OK);
     }
-    @PutMapping("updateCourse")
+    @PutMapping("updateCourse/{courseCode}")
     public ResponseEntity<String> updateCourse(@PathVariable int courseCode, @RequestBody Course Ucourse){
         for(Course c : courseList) {
             if (c.getCourseCode() == courseCode) {
@@ -56,7 +57,7 @@ public class CController {
         }
         return new ResponseEntity<>("Course not fount", HttpStatus.NOT_FOUND);
     }
-    @DeleteMapping("courseCode")
+    @DeleteMapping("deleteCourse/{code}")
     public ResponseEntity<String> deleteCourse(@PathVariable int code){
         for(Course c : courseList){
             if(c.getCourseCode()==code) {
